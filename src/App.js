@@ -1,23 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import NavBar from "./Components/NavBar";
+import SideBar from "./Components/SideBar";
+import Add_admin from "./Components/Super_admin/Add_admin";
+import Analyse_dashboard from "./Components/Super_admin/Analyse_dashboard";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+      <NavBar />
+      <div className="app-main">
+        <SideBar />
+        {/* <Analyse_dashboard /> */}
+        <Add_admin/>
+      </div>
     </div>
   );
 }
