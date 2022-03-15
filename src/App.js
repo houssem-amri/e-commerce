@@ -1,4 +1,9 @@
 import "./App.css";
+import Add_catégorie from "./Components/Admin/Add_catégorie";
+import Add_product from "./Components/Admin/Add_product";
+import Table_catégorie from "./Components/Admin/Table_catégorie";
+import Table_product from "./Components/Admin/Table_product";
+import Table_User from "./Components/Admin/Table_User";
 import NavBar from "./Components/NavBar";
 import SideBar from "./Components/SideBar";
 import Add_admin from "./Components/Super_admin/Add_admin";
@@ -10,8 +15,13 @@ function App() {
       <NavBar />
       <div className="app-main">
         <SideBar />
-        {/* <Analyse_dashboard /> */}
+        {/* <Analyse_dashboard /> 
         <Add_admin/>
+        <Add_product/>
+        <Table_product/>
+        <Add_catégorie/>
+        <Table_catégorie/>*/}
+        <Table_User/>
       </div>
     </div>
   );
