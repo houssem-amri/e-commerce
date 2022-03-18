@@ -6,8 +6,9 @@ import Table_product from "./Components/Admin/Table_product";
 import Table_User from "./Components/Admin/Table_User";
 import NavBar from "./Components/NavBar";
 import SideBar from "./Components/SideBar";
-import Add_admin from "./Components/Super_admin/Add_admin";
+import Add_conseilleur from "./Components/Super_admin/Add_conseilleur";
 import Analyse_dashboard from "./Components/Super_admin/Analyse_dashboard";
+import Table_conseilleur from "./Components/Super_admin/Table_conseilleur";
 
 function App() {
   return (
@@ -16,15 +17,15 @@ function App() {
       <div className="app-main">
         <SideBar />
         
-        {/* <Analyse_dashboard /> 
-        <Table_product/>
+      
+        {/* <Analyse_dashboard /> */}
+        {/* <Table_product/> */}
+        {/* <Add_product/> */}
+        {/* <Add_conseilleur/> */}
+        {/* <Add_catégorie/> */}
+        {/* <Table_conseilleur/> */}
         <Table_User/>
-        <Add_product/>
-        
-        <Add_admin/>
-        
-        <Add_catégorie/>*/}
-        <Table_catégorie/>
+        {/* <Add_product/> */}
       </div>
     </div>
   );

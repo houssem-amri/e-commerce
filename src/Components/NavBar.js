@@ -51,7 +51,7 @@ export default function NavBar() {
             <div className="widget-content-left">
               <div className="btn-group">
                 <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" className="p-0 btn">
-                  <img width={42} className="rounded-circle" src="assets/images/avatars/1.jpg" alt />
+                  <img width={42} className="rounded-circle" src="assets/images/avatars/1.jpg" alt="/" />
                   <i className="fa fa-angle-down ml-2 opacity-8" />
                 </a>
                 <div tabIndex={-1} role="menu" aria-hidden="true" className="dropdown-menu dropdown-menu-right">
