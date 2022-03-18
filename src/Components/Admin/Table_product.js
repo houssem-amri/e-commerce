@@ -1,30 +1,27 @@
-import React, { useState } from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 import Banner from '../Banner'
 
 export default function Table_product() {
-    const data = [
-        {
-            nom_produit: "parfum",
-            catégorie: "cosmetique",
-            code: "222",
-            quantité: "1",
-            prix: "150",
-        },
-        {
-            nom_produit: "tablette",
-            catégorie: "smart phone",
-            code: "111",
-            quantité: "1",
-            prix: "450",
-        },
-        {
-            nom_produit: "machine a laver",
-            catégorie: "electro ménager",
-            code: "33",
-            quantité: "2",
-            prix: "2000",
-        },
-    ]
+        const [Produit, setProduit] = useState([]);
+    
+        useEffect(() => {
+          getAllProduit();
+        }, []);
+      
+        const getAllProduit = () => {
+          axios
+            .get("http://localhost:3200/api/get_produit")
+            .then((result) => {
+              setProduit(result.data.data);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        };
+    
+     
+  
     return (
         <div className="app-main__outer">
             <div className="app-main__inner">
@@ -37,21 +34,21 @@ export default function Table_product() {
                                 <table className="mb-0 table">
                                     <thead>
                                         <tr>
-                                            <th>nom_produit</th>
-                                            <th>catégorie</th>
+                                            <th>nomProduit</th>
+                                            <th>categorie</th>
                                             <th>code</th>
-                                            <th>quantité</th>
+                                            <th>quantite</th>
                                             <th>prix</th>
                                             <th>action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {data.map((value, i) => (
+                                        {Produit.map((value, i) => (
                                             <tr key={i}>
-                                                <td>{value.nom_produit}</td>
-                                                <td>{value.catégorie}</td>
+                                                <td>{value.nomProduit}</td>
+                                                <td>{value.categorie}</td>
                                                 <td>{value.code}</td>
-                                                <td>{value.quantité}</td>
+                                                <td>{value.quantite}</td>
                                                 <td>{value.prix}</td>
                                                 <td>
                                                     <button className="mb-2 mr-2 btn-transition btn btn-outline-info">

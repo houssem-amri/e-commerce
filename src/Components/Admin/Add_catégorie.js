@@ -1,21 +1,28 @@
+import axios from 'axios';
 import React, { useState } from 'react'
 import Banner from '../Banner';
 
 export default function Add_catégorie() {
-const[nomCatégorie, setnomcatégorie] = useState("");
+const[Catégorie, setcatégorie] = useState("");
 
-const changenomcatégorie = (event) => {setnomcatégorie (event.target.value);};
+const changecatégorie = (event) => {setcatégorie (event.target.value);};
 
 
 const Handlesubmit = () => {
     let data ={
-        NOMCAT:nomCatégorie, 
+        Categorie:Catégorie, 
         
-    }
+    };
     console.log("here response",data);
-
-} 
-
+axios
+.post("http://localhost:3200/api/ajouter_categorie", data)
+.then((response) => {
+  console.log("here response", response.data.message);
+})
+.catch((error) => {
+  console.log(error);
+});
+}
 
   return (
    
@@ -29,16 +36,16 @@ const Handlesubmit = () => {
             <div className="form-row">
               <div className="col-md-6">
                 <div className="position-relative form-group">
-                  <label htmlFor="examplenomcatégorie">
+                  <label htmlFor="examplecatégorie">
                    Catégorie
                   </label>
                   <input
-                    name=" nomcatégorie"
-                    id="examplenomcatégorie"
-                    placeholder="nomcatégorie"
+                    name=" catégorie"
+                    id="examplecatégorie"
+                    placeholder="catégorie"
                     type="text"
                     className="form-control"
-                    onChange={(event)=>changenomcatégorie(event)}
+                    onChange={(event)=>changecatégorie(event)}
                   />
                 </div>
               </div>

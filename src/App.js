@@ -15,13 +15,16 @@ function App() {
       <NavBar />
       <div className="app-main">
         <SideBar />
+        
         {/* <Analyse_dashboard /> 
-        <Add_admin/>
-        <Add_product/>
         <Table_product/>
-        <Add_catégorie/>
-        <Table_catégorie/>*/}
         <Table_User/>
+        <Add_product/>
+        
+        <Add_admin/>
+        
+        <Add_catégorie/>*/}
+        <Table_catégorie/>
       </div>
     </div>
   );

@@ -1,7 +1,74 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 import Banner from "../Banner";
 
+
 export default function Add_admin() {
+const [Nom, setNom] = useState("");
+  const [Prenom, setPrenom] = useState("");
+  const [email, setEmail] = useState("");
+  const [Password, setPassword] = useState("");
+  const [adress, setAdress] = useState("");
+  const [City, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [Zip, setZip] = useState("");
+ 
+
+  const ChangeNom = (event) => {
+    setNom(event.target.value);
+  };
+  const ChangePrenom = (event) => {
+    setPrenom(event.target.value);
+  };
+  const ChangeEmail = (event) => {
+    setEmail(event.target.value);
+  };
+  const ChangePassword = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const ChangeAdress = (event) => {
+    setAdress(event.target.value);
+  };
+  const ChangeCity = (event) => {
+    setCity(event.target.value);
+  };
+  const ChangeState = (event) => {
+    setState(event.target.value);
+  };
+  const ChangeZip = (event) => {
+    setZip(event.target.value);
+  };
+
+  const HandleSubmit = () => {
+    let data = {
+     Nom:Nom,
+     Prenom:Prenom,
+      email: email,
+      Password: Password,
+      adress: adress,
+      City:City,
+      state: state,
+     Zip:Zip,
+    };
+    console.log("here response", data);
+
+    axios
+    .post("http://localhost:3200/api/ajouter_conseilleur", data)
+    .then((response) => {
+      console.log("here response", response.data.message);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+
+
+
+
+
+
+  };
   return (
     <div className="app-main__outer">
       <div className="app-main__inner">
@@ -11,17 +78,51 @@ export default function Add_admin() {
             <h5 className="card-title">Grid Rows</h5>
             <form className>
               <div className="form-row">
+              <div className="col-md-6">
+                  <div className="position-relative form-group">
+                    
+                    <label htmlFor="exampleNom" className>
+                     nom
+                    </label>
+                    <input
+                      name="Nom"
+                      id="exampleNom"
+                      placeholder="Nom"
+                      type="text"
+                      className="form-control"
+                      onChange={(event) => ChangeNom(event)}
+                    />
+                  </div>
+                </div>
                 <div className="col-md-6">
                   <div className="position-relative form-group">
+                    
+                    <label htmlFor="examplePrenom" className>
+                    Prenom
+                    </label>
+                    <input
+                      name="Prenom"
+                      id="examplePrenom"
+                      placeholder="prenom"
+                      type="text"
+                      className="form-control"
+                      onChange={(event) => ChangePrenom(event)}
+                    />
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="position-relative form-group">
+
                     <label htmlFor="exampleEmail11" className>
                       Email
                     </label>
                     <input
                       name="email"
                       id="exampleEmail11"
-                      placeholder="with a placeholder"
+                      placeholder="aaaaa@gmail.com"
                       type="email"
                       className="form-control"
+                      onChange={(event) => ChangeEmail(event)}
                     />
                   </div>
                 </div>
@@ -33,9 +134,10 @@ export default function Add_admin() {
                     <input
                       name="password"
                       id="examplePassword11"
-                      placeholder="password placeholder"
+                      placeholder="******"
                       type="password"
                       className="form-control"
+                      onChange={(event) => ChangePassword(event)}
                     />
                   </div>
                 </div>
@@ -50,20 +152,10 @@ export default function Add_admin() {
                   placeholder="1234 Main St"
                   type="text"
                   className="form-control"
+                  onChange={(event) => ChangeAdress(event)}
                 />
               </div>
-              <div className="position-relative form-group">
-                <label htmlFor="exampleAddress2" className>
-                  Address 2
-                </label>
-                <input
-                  name="address2"
-                  id="exampleAddress2"
-                  placeholder="Apartment, studio, or floor"
-                  type="text"
-                  className="form-control"
-                />
-              </div>
+              
               <div className="form-row">
                 <div className="col-md-6">
                   <div className="position-relative form-group">
@@ -75,6 +167,7 @@ export default function Add_admin() {
                       id="exampleCity"
                       type="text"
                       className="form-control"
+                      onChange={(event) => ChangeCity(event)}
                     />
                   </div>
                 </div>
@@ -88,6 +181,7 @@ export default function Add_admin() {
                       id="exampleState"
                       type="text"
                       className="form-control"
+                      onChange={(event) => ChangeState(event)}
                     />
                   </div>
                 </div>
@@ -101,6 +195,7 @@ export default function Add_admin() {
                       id="exampleZip"
                       type="text"
                       className="form-control"
+                      onChange={(event) => ChangeZip(event)}
                     />
                   </div>
                 </div>
@@ -116,11 +211,12 @@ export default function Add_admin() {
                   Check me out
                 </label>
               </div>
-              <button className="mt-2 btn btn-primary">Sign in</button>
+              <button type= "button" onClick={HandleSubmit}className="mt-2 btn btn-primary">Sign in</button>
             </form>
           </div>
         </div>
       </div>
     </div>
-  );
-}
+
+
+  );}
