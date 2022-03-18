@@ -1,11 +1,10 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Banner from "../Banner";
 
-export default function Table_product() {
+export default function Table_conseilleur() {
   const [users, setUsers] = useState([]);
-
-  const Name = "ahlem";
+ 
 
   useEffect(() => {
     getAllConseilleur();
@@ -22,11 +21,10 @@ export default function Table_product() {
         console.log(err);
       });
   };
-
   return (
     <div className="app-main__outer">
       <div className="app-main__inner">
-        <Banner title="Table Client" icon="pe-7s-users" />
+        <Banner title="Table Conseilleur" icon="pe-7s-users" />
         <div className="main-card mb-3 card">
           <div className="card-body">
             <h5 className="card-title">tableau des utilisateurs</h5>
@@ -39,13 +37,13 @@ export default function Table_product() {
                       <th>Prenom</th>
                       <th>Email</th>
                       <th>password</th>
-                      <th>Action</th>
+                      <th>action</th>
                     </tr>
                   </thead>
                   <tbody>
                     {users.map((value, i) => {
-                      if (value.role === "client") {
-                        return (
+                      if (value.role==="conseilleur") {
+                        return(
                           <tr key={i}>
                             <td>{value.nom}</td>
                             <td>{value.prenom}</td>
@@ -65,10 +63,10 @@ export default function Table_product() {
                                 ></i>
                               </button>
                             </td>
-                          </tr>
-                        );
+                          </tr>)
                       }
-                    })}
+                      
+                   } )}
                   </tbody>
                 </table>
               </div>
