@@ -8,10 +8,10 @@ export default function Table_product() {
   const Name = "ahlem";
 
   useEffect(() => {
-    getAllConseilleur();
+    getAllUsers();
   }, []);
 
-  const getAllConseilleur = () => {
+  const getAllUsers = () => {
     axios
       .get("http://localhost:3200/api/get_allUsers")
       .then((result) => {
