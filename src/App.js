@@ -23,8 +23,8 @@ function App() {
         {/* <Add_product/> */}
         {/* <Add_conseilleur/> */}
         {/* <Add_catégorie/> */}
-        {/* <Table_conseilleur/> */}
-        <Table_User/>
+        <Table_conseilleur/>
+        {/* <Table_User/> */}
         {/* <Add_product/> */}
       </div>
     </div>

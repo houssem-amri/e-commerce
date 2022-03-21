@@ -34,6 +34,17 @@ router.post("/add_users", (req, res) => {
   })
 
 
+  router.delete("/delete_user/:id",(req,res)=>{
+    console.log("ahawa id mte3na",req.params.id);
+    User.deleteOne({_id:req.params.id}).then(
+      res.status(200).json({
+        message:"user deleted succefful"
+      })
+    )
+
+  })
+
+
 
 
 

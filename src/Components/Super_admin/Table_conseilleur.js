@@ -1,14 +1,29 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Banner from "../Banner";
+import Modal_delete from "./Modal_delete";
 
 export default function Table_conseilleur() {
   const [users, setUsers] = useState([]);
- 
+  const [open, setOpen] = useState(false);
+  const [userSelected, setUserSelected] = useState({});
 
   useEffect(() => {
     getAllUsers();
   }, []);
+
+
+  const handleClickOpen = (user) => {
+    setUserSelected(user)
+    setOpen(true);
+  };
+
+
+  const handleClose = () => {
+    setOpen(false);
+    getAllUsers();
+  };
+
 
   const getAllUsers = () => {
     axios
@@ -21,6 +36,9 @@ export default function Table_conseilleur() {
         console.log(err);
       });
   };
+
+ 
+
   return (
     <div className="app-main__outer">
       <div className="app-main__inner">
@@ -42,8 +60,8 @@ export default function Table_conseilleur() {
                   </thead>
                   <tbody>
                     {users.map((value, i) => {
-                      if (value.role==="conseilleur") {
-                        return(
+                      if (value.role === "conseilleur") {
+                        return (
                           <tr key={i}>
                             <td>{value.nom}</td>
                             <td>{value.prenom}</td>
@@ -56,19 +74,23 @@ export default function Table_conseilleur() {
                                   style={{ fontSize: 18 }}
                                 ></i>
                               </button>
-                              <button className="mb-2 mr-2 btn-transition btn btn-outline-danger">
+                              <button
+                                className="mb-2 mr-2 btn-transition btn btn-outline-danger"
+                                onClick={() => handleClickOpen(value)}
+                              >
                                 <i
                                   className="pe-7s-trash"
                                   style={{ fontSize: 18 }}
                                 ></i>
                               </button>
                             </td>
-                          </tr>)
+                          </tr>
+                        );
                       }
-                      
-                   } )}
+                    })}
                   </tbody>
                 </table>
+                {open? <Modal_delete  user={userSelected} open={open}  onClose={handleClose}/> :null}
               </div>
             </div>
           </div>
