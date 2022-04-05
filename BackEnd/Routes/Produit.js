@@ -30,4 +30,37 @@ router.post("/ajouter_Produits", (req, res) => {
     });
   });
  
+  router.delete("/delete_produit/:id", (req, res) => {
+    console.log("herreeeeeee id ", req.params.id);
+    Produit.deleteOne({ _id: req.params.id }).then(
+      res.status(200).json({
+        message: "produit deleted succesful",
+      })
+    );
+  });
+  router.get("/get_Produit_byId/:id", (req, res) => {
+    Produit.findOne({ _id: req.params.id }).then((findedObject) => {
+       if (findedObject) {
+         res.status(200).json({
+           produit: findedObject,
+         });
+       }
+     });
+   });
+   router.put("/Update_Produit", (req, res) => {
+     const produit = {
+      _id: req.body._id,
+      nomProduit: req.body.nomProduit,
+      categorie: req.body.categorie,
+      code: req.body.code,
+      quantite : req.body.quantite,
+      prix: req.body.prix,
+      description: req.body.description,
+    };
+    Produit.updateOne({ _id: req.body._id }, produit).then(
+      res.status(200).json({
+        message: "produit updated successfuly",
+      })
+    );
+  })
   module.exports = router;

@@ -1,27 +1,41 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import Banner from '../Banner'
+import Modal_delete from "../Super_admin/Modal_delete";
+import { useNavigate } from "react-router-dom";
 
 export default function Table_product() {
-        const [Produit, setProduit] = useState([]);
-    
-        useEffect(() => {
-          getAllProduit();
-        }, []);
-      
-        const getAllProduit = () => {
-          axios
+    const [Produit, setProduit] = useState([]);
+    const [open, setOpen] = useState(false);
+    const [produitSelected, setproduitSelected] = useState({});
+    let navigate = useNavigate();
+
+    useEffect(() => {
+        getAllProduit();
+    }, []);
+    const handleClickOpen = (Produit) => {
+        setproduitSelected(Produit)
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+        getAllProduit();
+    };
+
+
+    const getAllProduit = () => {
+        axios
             .get("http://localhost:3200/api/get_produit")
             .then((result) => {
-              setProduit(result.data.data);
+                setProduit(result.data.data);
             })
             .catch((error) => {
-              console.log(error);
+                console.log(error);
             });
-        };
-    
-     
-  
+    };
+
+
+
     return (
         <div className="app-main__outer">
             <div className="app-main__inner">
@@ -51,12 +65,13 @@ export default function Table_product() {
                                                 <td>{value.quantite}</td>
                                                 <td>{value.prix}</td>
                                                 <td>
-                                                    <button className="mb-2 mr-2 btn-transition btn btn-outline-info">
+                                                    <button className="mb-2 mr-2 btn-transition btn btn-outline-info" onClick={() => navigate("/Edit_produit/" + value._id)}>
+
                                                         <i className="pe-7s-pen" style={{ fontSize: 18 }}></i>
                                                     </button>
                                                     <button
                                                         className="mb-2 mr-2 btn-transition btn btn-outline-danger"
-
+                                                        onClick={() => handleClickOpen(value)}
                                                     >
                                                         <i
                                                             className="pe-7s-trash"
@@ -70,7 +85,7 @@ export default function Table_product() {
                                         ))}
                                     </tbody>
                                 </table>
-
+                                {open ? <Modal_delete data={produitSelected} open={open} type="produit" onClose={handleClose} /> : null}
                             </div>
                         </div>
                     </div>

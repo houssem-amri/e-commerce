@@ -8,7 +8,8 @@ mongoose.connect('mongodb://localhost:27017/E-COMMERCEDB', { useNewUrlParser: tr
 
 var ProduitRouter = require ("./Routes/Produit")
 var CategorieRouter = require("./Routes/Categorie")
-var AdminRouter = require("./Routes/Admin")
+var UserRouter = require("./Routes/Users")
+
 const app = express()
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -25,7 +26,7 @@ app.use((req, res, next) => {
 
 app.use("/api", ProduitRouter);
 app.use("/api", CategorieRouter);
-app.use("/api", AdminRouter);
+app.use("/api", UserRouter);
 
 
 module.exports=app

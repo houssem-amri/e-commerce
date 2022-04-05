@@ -1,41 +1,63 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import Banner from '../Banner';
 
 export default function Add_product() {
   const [nomproduit, setnomproduit] = useState("");
-  const [Catégorie, setCatégorie] = useState("");
+  const [Categorie, setCategorie] = useState("");
+  const [Categories, setCategories] = useState([]);
   const [Code, setCode] = useState("");
-  const [quantité, setquantité] = useState("");
+  const [quantite, setquantite] = useState("");
   const [Prix, setPrix] = useState("");
   const [Description, setDescription] = useState("");
 
   const changenomproduit = (event) => { setnomproduit(event.target.value); };
-  const changeCatégorie = (event) => { setCatégorie(event.target.value); };
+  const changeCategorie = (event) => { setCategorie(event.target.value); };
   const changeCode = (event) => { setCode(event.target.value); };
-  const changequantité = (event) => { setquantité(event.target.value); };
+  const changequantite = (event) => { setquantite(event.target.value); };
   const changePrix = (event) => { setPrix(event.target.value); };
   const changeDescription = (event) => { setDescription(event.target.value); };
+  let navigate = useNavigate();
+  useEffect(() => {
+    getAllCategorie();
+  }, []);
+
 
   const Handlesubmit = () => {
     let data = {
       nomProduit: nomproduit,
-      categorie: Catégorie,
+      categorie: Categorie,
       code: Code,
-      quantite: quantité,
+      quantite: quantite,
       prix: Prix,
       description: Description,
     }
+
     console.log("here response", data);
     axios
       .post("http://localhost:3200/api/ajouter_Produits", data)
       .then((response) => {
         console.log("here response", response.data.message);
+       
+        navigate("/Table_product")
       })
       .catch((error) => {
         console.log(error);
       });
 
+  }
+  const getAllCategorie = () => {
+
+
+    axios
+      .get("http://localhost:3200/api/get_categorie")
+      .then((result) => {
+        setCategories(result.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
 
@@ -66,47 +88,54 @@ export default function Add_product() {
                 </div>
                 <div className="col-md-6">
                   <div className="position-relative form-group">
-                    <label htmlFor="exampleCatégorie">
-                      Catégorie
+                    <label htmlFor="exampleSelect">
+
+                      <select name="Select"
+                        id="exampleSelect"
+                        onChange={(event) => changeCategorie(event)}
+                        className="form-control">
+                        <option value="" > select categorie </option>
+
+                        {Categories?.map((value, i) => (
+                          <option key={i}  value={value.Categorie}> {value.Categorie}</option>
+                        ))}
+
+                      </select>
+                    </label >
+                  </div>
+                </div>
+
+                <div className="col-md-6">
+                  <div className="position-relative form-group">
+                    <label htmlFor="examplecode">
+                      code
                     </label>
                     <input
-                      name="Catégorie"
-                      id="exampleCatégorie"
-                      placeholder="Catégorie"
+                      name="code"
+                      id="examplecode"
+                      placeholder="****"
                       type="text"
                       className="form-control"
-                      onChange={(event) => changeCatégorie(event)}
+                      onChange={(event) => changeCode(event)}
                     />
                   </div>
                 </div>
-              </div>
-              <div className="position-relative form-group">
-                <label htmlFor="examplecode">
-                  code
-                </label>
-                <input
-                  name="code"
-                  id="examplecode"
-                  placeholder="****"
-                  type="text"
-                  className="form-control"
-                  onChange={(event) => changeCode(event)}
-                />
-              </div>
-              <div className="position-relative form-group">
-                <label htmlFor="exampleQuantité">
-                  Quantité
-                </label>
-                <input
-                  name="Quantité"
-                  id="exampleQuantité"
-                  placeholder="Quantité"
-                  type="text"
-                  className="form-control"
-                  onChange={(event) => changequantité(event)}
-                />
-              </div>
-              <div className="form-row">
+                <div className="col-md-6">
+                  <div className="position-relative form-group">
+                    <label htmlFor="exampleQuantite">
+                      Quantite
+                    </label>
+                    <input
+                      name="Quantite"
+                      id="exampleQuantite"
+                      placeholder="Quantite"
+                      type="text"
+                      className="form-control"
+                      onChange={(event) => changequantite (event)}
+                    />
+                  </div>
+                </div>
+
                 <div className="col-md-6">
                   <div className="position-relative form-group">
                     <label htmlFor="examplePrix" >
@@ -121,7 +150,7 @@ export default function Add_product() {
                     />
                   </div>
                 </div>
-                <div className="col-md-4">
+                <div className="col-md-6">
                   <div className="position-relative form-group">
                     <label htmlFor="exampleDescription">
                       Description
@@ -132,13 +161,17 @@ export default function Add_product() {
                       type="text"
                       className="form-control"
                       onChange={(event) => changeDescription(event)}
+
                     />
+
                   </div>
                 </div>
 
               </div>
               <button type="button" onClick={Handlesubmit} className="mt-2 btn btn-primary">ajouter</button>
+
             </form>
+
           </div>
         </div>
       </div>
